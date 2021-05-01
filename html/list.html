@@ -85,8 +85,8 @@
 				const tbl = json[c];
 				const date = tbl.date.substr(0, 10) + ' ' + tbl.date.substr(11);
 				grid.insertAdjacentHTML('beforeend',
-					'<div id="video"><div id="thumbnail"><a id="preview_thumb" href="javascript:;" onclick="popup(\'' + tbl.id + '\')"><img src="/movie_thumbs/' + tbl.id + '.png"></a><div id="overlay"><div id="duration">' + tbl.durationString + '</div></div></div><div id="title">' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div><div id="movieid">Movie ID: ' + tbl.id + '</div><div id="description"><span>' + tbl.desc + '</span></div><div id="date"><span>' + date + '</span></div><div id="buttons"><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></div></div>');
-			}
+					'<tr><td><img src="/movie_thumbs/' + tbl.id + '.png"></td><td><div>' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + ' (' + tbl.id + ')</div><div>Description: ' + tbl.desc + '<br>' + tbl.durationString + '</div></div></td><td><span>' + date.match(/./g).join('</span><span>') + '</span></td><td><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></td></tr>');
+		         }
 		}
 
 		loadMore.onclick = loadRows;
