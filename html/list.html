@@ -50,15 +50,21 @@
 		</div>
 		<div class="warning">welcome to the apiserver inside my domain! for updates, <a href="https://discord.io/goanimate4schools">Click here</a>.</div>
 	</header>
-	<center>
-      <div id="grid"></div>
-    </center><a id="load_more" href="javascript:;">LOAD MORE...
-    <form enctype='multipart/form-data' action='/upload_movie' method='post'>
-      <input id='file' type="file" onchange="this.form.submit()" name='import'>
-    </form>
-    <form enctype='multipart/form-data' action='/upload_character' method='post'>
+		<main>
+	<div id="gridcontainer">
+		<center><div id="grid">
+		</div></center>
+		<a id="load_more" href="javascript:;">
+			LOAD MORE...
+		</a>
+	</div>
+	<form enctype='multipart/form-data' action='/upload_movie' method='post'>
+		<input id='file' type="file" onchange="this.form.submit()" name='import' accept=".xml" />
+	</form>
+	<form enctype='multipart/form-data' action='/upload_character' method='post'>
       <input id='file2' type="file" onchange="this.form.submit()" name='import' accept=".xml">
     </form>
+	</main>
     <script>
 	    var json;
 		var grid = document.getElementById('grid');
