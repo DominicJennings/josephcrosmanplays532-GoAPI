@@ -143,6 +143,7 @@ module.exports = function (req, res, url) {
 					nextUrl: "/html/list.html",
 				},
 				allowScriptAccess: "always",
+			        movie: process.env.SWF_URL + "/go_full.swf"
 			     };
 			break;
 		}
