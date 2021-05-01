@@ -50,58 +50,73 @@
 		</div>
 		<div class="warning">welcome to the apiserver inside my domain! for updates, <a href="https://discord.io/goanimate4schools">Click here</a>.</div>
 	</header>
-		<main>
-	<div id="gridcontainer">
-		<center><div id="grid">
-		</div></center>
-		<a id="load_more" href="javascript:;">
-			LOAD MORE...
-		</a>
-	</div>
-	<form enctype='multipart/form-data' action='/upload_movie' method='post'>
-		<input id='file' type="file" onchange="this.form.submit()" name='import' accept=".xml" />
-	</form>
-	<form enctype='multipart/form-data' action='/upload_character' method='post'>
-      <input id='file2' type="file" onchange="this.form.submit()" name='import' accept=".xml">
-    </form>
-	</main>
-    <script>
-	    var json;
-		var grid = document.getElementById('grid');
-		var loadMore = document.getElementById('load_more');
-		const listReq = new XMLHttpRequest();
-		listReq.open('GET', '/movieList');
-		listReq.send();
+		<table>
+	<thead>
+		<tr>
+			<td></td>
+			<td>Video Title</td>
+			<td>Last Modified</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	<tfoot>
+		<tr>
+			<td colspan="127"><a id="load_more" href="javascript:;">LOAD MORE...</a></td>
+		</tr>
+	</tfoot>
+</table>
 
-		var C = 0;
-		function loadRows() {
-			let c = C; C += 69;
-			for (; c < C; c++) {
-				if (c > json.length - 1) {
-					loadMore.remove();
-					break;
-				}
+<footer>
+	<a id="discordlink" href="https://discord.io/goanimate4schools">Discord Server</a>
+</footer>
 
-				const tbl = json[c];
-				const date = tbl.date.substr(0, 10) + ' ' + tbl.date.substr(11);
-				grid.insertAdjacentHTML('beforeend',
-					'<tr><td><img src="/movie_thumbs/' + tbl.id + '.png"></td><td><div>' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + ' (' + tbl.id + ')</div><div>Description: ' + tbl.desc + '<br>' + tbl.durationString + '</div></div></td><td><span>' + date.match(/./g).join('</span><span>') + '</span></td><td><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></td></tr>');
-		         }
+<form enctype='multipart/form-data' action='/upload_movie' method='post'>
+	<input id='file' type="file" onchange="this.form.submit()" name='import' />
+</form>
+
+</body>
+
+<script>
+	// This loads the video list's content
+	const closeReq = new XMLHttpRequest();
+	closeReq.open('GET', '/events/close');
+	closeReq.send();
+
+	var json;
+	var tbody = document.getElementsByTagName('tbody')[0];
+	var loadMore = document.getElementById('load_more');
+	const listReq = new XMLHttpRequest();
+	listReq.open('GET', '/movieList');
+	listReq.send();
+
+	var C = 0;
+	function loadRows() {
+		let c = C; C += 69;
+		for (; c < C; c++) {
+			if (c > json.length - 1) {
+				loadMore.remove();
+				break;
+			}
+
+			const tbl = json[c];
+			const date = tbl.date.substr(0, 10) + ' ' + tbl.date.substr(11);
+			tbody.insertAdjacentHTML('beforeend',
+				'<tr><td><img src="/movie_thumbs/' + tbl.id + '.png"></td><td><div>' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + ' (' + tbl.id + ')</div><div>Description: ' + tbl.desc + '<br>' + tbl.durationString + '</div></div></td><td><span>' + date.match(/./g).join('</span><span>') + '</span></td><td><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></td></tr>');
 		}
+	}
 
-		loadMore.onclick = loadRows;
-		listReq.onreadystatechange = function (e) {
-			if (listReq.readyState != 4) return;
-			json = JSON.parse(listReq.responseText);
-			loadRows();
-		}
+	loadMore.onclick = loadRows;
+	listReq.onreadystatechange = function (e) {
+		if (listReq.readyState != 4) return;
+		json = JSON.parse(listReq.responseText);
+		loadRows();
+	}
 
-		function popup(id) {
-			window.open('/player?movieId=' + id, 'MsgWindow', 'width=1280,height=723,left=' + (screen.width / 2 - 640) + ',top=' + (screen.height / 2 - 360));
-		}
-	
-	</script>
-  </main>
+	function popup(id) {
+		window.open('/player?movieId=' + id, 'MsgWindow', 'width=1280,height=720,left=' + (screen.width / 2 - 640) + ',top=' + (screen.height / 2 - 360));
+	}
+</script>
 	<style>
 		html {
 			font-family: 'Sailec', Arial, sans-serif;
