@@ -107,6 +107,7 @@ module.exports = function (req, res, url) {
 			title = "Video Editor";
 			attrs = {
 				data: process.env.SWF_URL + "/go_full.swf",
+				type: "application/x-shockwave-flash",
 				id: "Studio",
                                 swf: process.env.SWF_URL + "/go_full.swf",
                                 width: "100%",
