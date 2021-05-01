@@ -118,34 +118,31 @@ module.exports = function (req, res, url) {
 
                                 hasVersion: "10.3"
                       };
-
-			if (!enable_full_screen) {
-                        studio_data.width  = 960;
-                        studio_data.height  = 630;
-                        resize_studio = false;
-                    }
-			studio_data.flashvars: {
-					"apiserver": "/",
-					"storePath": process.env.STORE_URL + "/<store>",
-					"isEmbed": 1,
-					"ctc": "go",
-					"ut": 50,
-					"bs": "default",
-					"appCode": "go",
-					"page": "",
-					"siteId": "go",
-					"lid": 13,
-					"isLogin": "Y",
-					"retut": 1,
-					"clientThemePath": process.env.CLIENT_URL + "/<client_theme>",
-					"themeId": "business",
-					"tlang": "en_US",
-					"presaveId": presave,
-					"goteam_draft_only": 1,
-					"isWide": 1,
-					"collab": 0,
-					"nextUrl": "/html/list.html",
-				};
+                             params = {
+			flashvars: {
+					apiserver: "/",
+					storePath: process.env.STORE_URL + "/<store>",
+					isEmbed: 1,
+					ctc: "go",
+					ut: 50,
+					bs: "default",
+					appCode: "go",
+					page: "",
+					siteId: "go",
+					lid: 13,
+					isLogin: "Y",
+					retut: 1,
+					clientThemePath: process.env.CLIENT_URL + "/<client_theme>",
+					themeId: "business",
+					tlang: "en_US",
+					presaveId: presave,
+					goteam_draft_only: 1,
+					isWide: 1,
+					collab: 0,
+					nextUrl: "/html/list.html",
+				},
+				allowScriptAccess: "always",
+			     };
 			break;
 		}
 
