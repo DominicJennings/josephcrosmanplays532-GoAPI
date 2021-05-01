@@ -106,6 +106,7 @@ module.exports = function (req, res, url) {
 					: `m-${fUtil[query.noAutosave ? "getNextFileId" : "fillNextFileId"]("movie-", ".xml")}`;
 			title = "Video Editor";
 			attrs = {
+				data: process.env.SWF_URL + "/go_full.swf",
 				id: "Studio",
                                 swf: process.env.SWF_URL + "/go_full.swf",
                                 width: "100%",
