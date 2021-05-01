@@ -15,15 +15,6 @@
 						<a href="/cc?themeId=family&bs=bob">Bob</a>
 						<a href="/cc?themeId=family&bs=rocky">Rocky</a>
 						<div></div>
-						<!--
-						<a href="/cc?themeId=business&bs=default">Business</a>
-						<a href="/cc?themeId=business&bs=heavy">Heavy</a>
-						<a href="/cc?themeId=business&bs=kid">Kid</a>
-						<div></div>
-						<a href="/cc?themeId=whiteboard&bs=default">Whiteboard</a>
-						<a href="/cc?themeId=whiteboard&bs=kid">Whiteboard (Kid)</a>
-						<div></div>
-						-->
 						<a href="/cc?themeId=anime&bs=guy">Guy (Anime)</a>
 						<a href="/cc?themeId=anime&bs=girl">Girl (Anime)</a>
 						<div></div>
@@ -51,36 +42,20 @@
 				<a href="/go_full" class="button_big">MAKE A VIDEO</a>
 			</div>
 		</div>
-		<div class="warning"><strong>I was just notified by Spark that GoAnimate Inc. wanted me to <a
-					href="https://media.discordapp.net/attachments/741394845679091792/778077861650759711/unknown.png">cease
-					development on Wrapper</a> ... again.</strong><br>This instance of Wrapper will be taken down any
-			time before
-			2020-11-17 09:00 UTC.<br><a href='https://github.com/GoAnimate-Wrapper/GoAnimate-Wrapper/projects/1'>Link
-				to a progress map of the project on GitHub</a>
-		</div>
+		<div class="warning">welcome to the apiserver inside my domain! for updates, <a href="https://discord.io/goanimate4schools">Click here</a>.</div>
 	</header>
-	<table>
-		<thead>
-			<tr>
-				<td></td>
-				<td>Video Title</td>
-				<td>Last Modified</td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody></tbody>
-		<tfoot>
-			<tr>
-				<td colspan="127"><a id="load_more" href="javascript:;">LOAD MORE...</a></td>
-			</tr>
-		</tfoot>
-	</table>
-	<form enctype='multipart/form-data' action='/upload_movie' method='post'>
-		<input id='file' type="file" onchange="this.form.submit()" name='import' accept=".xml" />
-	</form>
-	<script>
-		var json;
-		var tbody = document.getElementsByTagName('tbody')[0];
+	<center>
+      <div id="grid"></div>
+    </center><a id="load_more" href="javascript:;">LOAD MORE...
+    <form enctype='multipart/form-data' action='/upload_movie' method='post'>
+      <input id='file' type="file" onchange="this.form.submit()" name='import'>
+    </form>
+    <form enctype='multipart/form-data' action='/upload_character' method='post'>
+      <input id='file2' type="file" onchange="this.form.submit()" name='import' accept=".xml">
+    </form>
+    <script>
+	    var json;
+		var grid = document.getElementById('grid');
 		var loadMore = document.getElementById('load_more');
 		const listReq = new XMLHttpRequest();
 		listReq.open('GET', '/movieList');
@@ -97,8 +72,8 @@
 
 				const tbl = json[c];
 				const date = tbl.date.substr(0, 10) + ' ' + tbl.date.substr(11);
-				tbody.insertAdjacentHTML('beforeend',
-					'<tr><td><img src="/movie_thumbs/' + tbl.id + '.png"></td><td><div>' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div><div>' + tbl.durationString + '</div></div></td><td><span>' + date + '</span></td><td><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></td></tr>');
+				grid.insertAdjacentHTML('beforeend',
+					'<div id="video"><div id="thumbnail"><a id="preview_thumb" href="javascript:;" onclick="popup(\'' + tbl.id + '\')"><img src="/movie_thumbs/' + tbl.id + '.png"></a><div id="overlay"><div id="duration">' + tbl.durationString + '</div></div></div><div id="title">' + tbl.title.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div><div id="movieid">Movie ID: ' + tbl.id + '</div><div id="description"><span>' + tbl.desc + '</span></div><div id="date"><span>' + date + '</span></div><div id="buttons"><a href="javascript:;" onclick="popup(\'' + tbl.id + '\')"></a><a href="/go_full?movieId=' + tbl.id + '"></a><a href="/movies/' + tbl.id + '.xml" download="' + tbl.title + '"></a></div></div>');
 			}
 		}
 
@@ -112,7 +87,9 @@
 		function popup(id) {
 			window.open('/player?movieId=' + id, 'MsgWindow', 'width=1280,height=723,left=' + (screen.width / 2 - 640) + ',top=' + (screen.height / 2 - 360));
 		}
+	
 	</script>
+  </main>
 	<style>
 		html {
 			font-family: 'Sailec', Arial, sans-serif;
