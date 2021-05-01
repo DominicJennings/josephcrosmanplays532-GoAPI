@@ -170,7 +170,7 @@ module.exports = function (req, res, url) {
 	res.end(
 		`<script>document.title='${title}',flashvars=${JSON.stringify(
 			params.flashvars
-		)}</script><div id="studio_holder" style="width: 1358px;">${toObjectString(attrs, params)}</body>${stuff.pages[url.pathname] || ""}`
+		)}</script><div id="studio_holder" style="width: 1358px;">${toObjectString(attrs, params)}</div>${stuff.pages[url.pathname] || ""}`
 	);
 	return true;
 };
